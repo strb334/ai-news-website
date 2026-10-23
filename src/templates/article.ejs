@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - AI News</title>
+    <meta name="description" content="{{description}}">
+    <link rel="canonical" href="{{canonicalUrl}}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{canonicalUrl}}">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:image" content="{{image}}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{canonicalUrl}}">
+    <meta property="twitter:title" content="{{title}}">
+    <meta property="twitter:description" content="{{description}}">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{title}}",
+        "description": "{{description}}",
+        "image": "{{image}}",
+        "author": {
+            "@type": "Organization",
+            "name": "AI News"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI News",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://ainews.example.com/logo.png"
+            }
+        },
+        "datePublished": "{{date}}",
+        "dateModified": "{{date}}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{canonicalUrl}}"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z'/></svg>">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <div class="logo-icon">AI</div>
+                News
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/about" class="nav-link">About</a>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" id="nav-search" placeholder="Search AI news..." onkeyup="searchNews(this.value)">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="sv" onclick="setLanguage('sv')">SV</button>
+                <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">DE</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="/">Home</a> / <span>{{category}}</span>
+            </nav>
+            
+            <article class="article-content">
+                <header class="article-header">
+                    <div class="article-meta">
+                        <span class="category-badge">{{category}}</span>
+                        <span class="article-date">📅 {{date}}</span>
+                        <span class="article-read-time">📖 {{readTime}}</span>
+                    </div>
+                    <h1 class="article-title">{{title}}</h1>
+                    <div class="article-tags">
+                        {{#each tags}}
+                            <span class="tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </header>
+                
+                <div class="article-image">
+                    <img src="{{image}}" alt="{{title}}">
+                </div>
+                
+                <div class="article-body">
+                    <p class="article-description">{{description}}</p>
+                    
+                    <div class="article-actions">
+                        <button class="btn btn-primary" onclick="shareArticle()">Share Article</button>
+                        <button class="btn btn-secondary" onclick="saveArticle()">Save for Later</button>
+                        <button class="btn btn-outline" onclick="readMore()">Read More</button>
+                    </div>
+                </div>
+                
+                <footer class="article-footer">
+                    <div class="author-info">
+                        <div class="author-avatar">AI</div>
+                        <div class="author-details">
+                            <h4>AI News Team</h4>
+                            <p>Artificial Intelligence News & Analysis</p>
+                        </div>
+                    </div>
+                    
+                    <div class="article-stats">
+                        <div class="stat">
+                            <span class="stat-number">{{tags.length}}</span>
+                            <span class="stat-label">Tags</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">{{readTime}}</span>
+                            <span class="stat-label">Read Time</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24</span>
+                            <span class="stat-label">Comments</span>
+                        </div>
+                    </div>
+                </footer>
+            </article>
+            
+            <section class="related-articles">
+                <h2>Related Articles</h2>
+                <div class="related-grid" id="related-articles">
+                    <!-- Related articles will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AI News</h3>
+                    <p>Your trusted source for artificial intelligence news and updates.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/search">Search</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links" id="footer-categories">
+                        <!-- Categories will be populated by JavaScript -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Stay Updated</h3>
+                    <p>Subscribe to our newsletter for the latest AI news delivered to your inbox.</p>
+                    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AI News. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allNews = [];
+        let currentArticle = null;
+        
+        // Initialize the article page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadArticle();
+            loadRelatedArticles();
+            setupNewsletterForm();
+            setupLanguageSelector();
+            setupSearch();
+        });
+        
+        async function loadArticle() {
+            // Find article ID from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id') || localStorage.getItem('lastViewedArticle');
+            
+            if (articleId) {
+                // Load article data
+                const response = await fetch('/api/news/' + articleId);
+                const data = await response.json();
+                currentArticle = data.data;
+                displayArticle(currentArticle);
+            }
+        }
+        
+        function displayArticle(article) {
+            // Update page title and meta
+            document.title = article.title + ' - AI News';
+            document.querySelector('meta[name="description"]').content = article.description;
+            
+            // Update article content (this would typically be done server-side)
+            const articleBody = document.querySelector('.article-body');
+            // In a real implementation, this would show the full article content
+        }
+        
+        async function loadRelatedArticles() {
+            try {
+                const response = await fetch('/api/news');
+                const data = await response.json();
+                allNews = data.data;
+                
+                if (currentArticle) {
+                    const related = allNews
+                        .filter(article => article.category === currentArticle.category && article.id !== currentArticle.id)
+                        .slice(0, 3);
+                    
+                    displayRelatedArticles(related);
+                }
+            } catch (error) {
+                console.error('Error loading related articles:', error);
+            }
+        }
+        
+        function displayRelatedArticles(articles) {
+            const container = document.getElementById('related-articles');
+            container.innerHTML = articles.map(article => `
+                <article class="related-card">
+                    <img src="${article.image}" alt="${article.title}" class="related-image" loading="lazy">
+                    <div class="related-content">
+                        <span class="related-category">${article.category}</span>
+                        <h3 class="related-title"><a href="/article?id=${article.id}">${article.title}</a></h3>
+                        <p class="related-description">${article.description.substring(0, 100)}...</p>
+                        <div class="related-meta">
+                            <span class="related-date">📅 ${new Date(article.date).toLocaleDateString()}</span>
+                            <span class="related-read-time">📖 ${article.readTime}</span>
+                        </div>
+                    </div>
+                </article>
+            ").join('');
+        }
+        
+        function searchNews(query) {
+            const filteredNews = allNews.filter(news =>
+                news.title.toLowerCase().includes(query.toLowerCase()) ||
+                news.description.toLowerCase().includes(query.toLowerCase()) ||
+                news.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+            );
+            
+            if (query) {
+                window.location.href = '/search?q=' + encodeURIComponent(query);
+            }
+        }
+        
+        function setupLanguageSelector() {
+            // Load saved language from localStorage
+            const savedLang = localStorage.getItem('lang') || 'en';
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => {
+                if (btn.dataset.lang === savedLang) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function setLanguage(lang) {
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('lang', lang);
+            console.log('Switching to language:', lang);
+        }
+        
+        function setupSearch() {
+            const searchInput = document.getElementById('nav-search');
+            if (searchInput) {
+                // Debounce search
+                let timeoutId;
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => {
+                        searchNews(this.value);
+                    }, 300);
+                });
+            }
+        }
+        
+        function setupNewsletterForm() {
+            const form = document.querySelector('.newsletter-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    subscribeNewsletter(email);
+                });
+            }
+        }
+        
+        async function subscribeNewsletter(email) {
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('Successfully subscribed! You will now receive our newsletter.', 'success');
+                    this.reset();
+                } else {
+                    showNotification(data.message || 'Subscription failed. Please try again.', 'error');
+                }
+            } catch (error) {
+                showNotification('Error subscribing. Please try again later.', 'error');
+            }
+        }
+        
+        function shareArticle() {
+            if (navigator.share && currentArticle) {
+                navigator.share({
+                    title: currentArticle.title,
+                    text: currentArticle.description,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(window.location.href);
+                showNotification('Article link copied to clipboard!', 'success');
+            }
+        }
+        
+        function saveArticle() {
+            let saved = JSON.parse(localStorage.getItem('savedArticles')) || [];
+            
+            if (currentArticle) {
+                const existing = saved.find(article => article.id === currentArticle.id);
+                
+                if (!existing) {
+                    saved.push(currentArticle);
+                    localStorage.setItem('savedArticles', JSON.stringify(saved));
+                    showNotification('Article saved for later!', 'success');
+                } else {
+                    showNotification('Article already saved!', 'info');
+                }
+            }
+        }
+        
+        function readMore() {
+            // In a real implementation, this would redirect to the full article
+            // For now, just log the action
+            console.log('Read more clicked for article:', currentArticle?.id);
+            showNotification('In a real implementation, this would load the full article content.', 'info');
+        }
+        
+        function showNotification(message, type = 'info') {
+            // Create and show a notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

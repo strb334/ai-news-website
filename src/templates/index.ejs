@@ -234,7 +234,7 @@
                     <img src="${item.image}" alt="${item.title}" class="news-image" loading="lazy">
                     <div class="news-content">
                         <span class="news-category">${item.category}</span>
-                        <a href="#" class="news-title" onclick="viewNews(${item.id})">${item.title}</a>
+                        <a href="/article?id=${item.id}" class="news-title" onclick="viewNews(${item.id})">${item.title}</a>
                         <p class="news-description">${item.description}</p>
                         <div class="news-meta">
                             <span class="news-date">📅 ${new Date(item.date).toLocaleDateString()}</span>
@@ -249,8 +249,8 @@
         }
 
         function viewNews(id) {
-            // In a real implementation, this would navigate to a detailed news page
-            console.log('Viewing news article:', id);
+            // Navigate to article page
+            window.location.href = '/article?id=' + id;
         }
 
         function searchNews(query) {
@@ -286,7 +286,6 @@
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
             localStorage.setItem('lang', lang);
-            
             // In a real implementation, this would translate the page
             console.log('Switching to language:', lang);
         }
