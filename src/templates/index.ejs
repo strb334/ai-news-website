@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News | Latest Artificial Intelligence Technology News</title>
+    <meta name="description" content="Stay updated with the latest AI news, developments, and research in machine learning, deep learning, NLP, computer vision, and AI ethics.">
+    <link rel="canonical" href="https://ainews.example.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ainews.example.com">
+    <meta property="og:title" content="AI News | Latest Artificial Intelligence Technology News">
+    <meta property="og:description" content="Stay updated with the latest AI news, developments, and research in machine learning, deep learning, NLP, computer vision, and AI ethics.">
+    <meta property="og:image" content="https://picsum.photos/seed/ainews/1200/630">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ainews.example.com">
+    <meta property="twitter:title" content="AI News | Latest Artificial Intelligence Technology News">
+    <meta property="twitter:description" content="Stay updated with the latest AI news, developments, and research in machine learning, deep learning, NLP, computer vision, and AI ethics.">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AI News",
+        "url": "https://ainews.example.com",
+        "description": "Stay updated with the latest AI news, developments, and research in machine learning, deep learning, NLP, computer vision, and AI ethics.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://ainews.example.com/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z'/></svg>">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <div class="logo-icon">AI</div>
+                News
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/about" class="nav-link">About</a>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" id="nav-search" placeholder="Search AI news..." onkeyup="searchNews(this.value)">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="sv" onclick="setLanguage('sv')">SV</button>
+                <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">DE</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">AI News</h1>
+                    <p class="hero-subtitle">Stay updated with the latest artificial intelligence developments, research, and industry news</p>
+                    <div class="hero-search">
+                        <input type="text" class="hero-search-input" id="hero-search" placeholder="Search for AI news, topics, or technologies..." onkeyup="heroSearch(this.value)">
+                        <svg class="hero-search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">Browse by Category</h2>
+                <div class="categories-grid" id="categories-grid">
+                    <!-- Categories will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest News Section -->
+        <section class="news">
+            <div class="container">
+                <h2 class="section-title">Latest AI News</h2>
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                </div>
+                <div class="news-grid" id="news-grid">
+                    <!-- News cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AI News</h3>
+                    <p>Your trusted source for artificial intelligence news and updates.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/search">Search</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links" id="footer-categories">
+                        <!-- Categories will be populated by JavaScript -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Stay Updated</h3>
+                    <p>Subscribe to our newsletter for the latest AI news delivered to your inbox.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AI News. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allNews = [];
+        let categories = [];
+
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStats();
+            loadCategories();
+            loadNews();
+            setupLanguageSelector();
+            setupSearch();
+        });
+
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/stats');
+                const data = await response.json();
+                updateStats(data.data);
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        function updateStats(stats) {
+            const categoriesGrid = document.getElementById('categories-grid');
+            if (categoriesGrid) {
+                categories = stats.categories || [];
+                categoriesGrid.innerHTML = categories.map(cat => `
+                    <a href="/category/${cat.toLowerCase().replace(/\\s+/g, '-')}" class="category-card">
+                        <div class="category-icon">🤖</div>
+                        <h3 class="category-title">${cat}</h3>
+                        <p class="category-count">${Math.floor(Math.random() * 50) + 10} articles</p>
+                    </a>
+                ").join('');
+            }
+
+            const footerCategories = document.getElementById('footer-categories');
+            if (footerCategories) {
+                footerCategories.innerHTML = stats.categories.map(cat => `
+                    <li><a href="/category/${cat.toLowerCase().replace(/\\s+/g, '-')}">${cat}</a></li>
+                ").join('');
+            }
+        }
+
+        async function loadCategories() {
+            try {
+                const response = await fetch('/api/categories');
+                const data = await response.json();
+                categories = data.data;
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
+
+        async function loadNews() {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('news-grid').innerHTML = '';
+            
+            try {
+                const response = await fetch('/api/news');
+                const data = await response.json();
+                allNews = data.data || [];
+                displayNews(allNews);
+            } catch (error) {
+                console.error('Error loading news:', error);
+                // Fallback to sample news
+                displayNews([
+                    {
+                        id: 1,
+                        title: "OpenAI Announces GPT-5 Development",
+                        description: "OpenAI has revealed plans to develop GPT-5, the next generation of their language models, with enhanced capabilities and improved safety measures.",
+                        category: "Language Models",
+                        image: "https://picsum.photos/seed/openai/800/400",
+                        date: "2024-01-15",
+                        readTime: "5 min read",
+                        tags: ["OpenAI", "GPT-5", "Language Models"]
+                    }
+                ]);
+            }
+            
+            document.getElementById('loading').classList.add('hidden');
+        }
+
+        function displayNews(news) {
+            const newsGrid = document.getElementById('news-grid');
+            newsGrid.innerHTML = news.map(item => `
+                <article class="news-card animate-in">
+                    <img src="${item.image}" alt="${item.title}" class="news-image" loading="lazy">
+                    <div class="news-content">
+                        <span class="news-category">${item.category}</span>
+                        <a href="#" class="news-title" onclick="viewNews(${item.id})">${item.title}</a>
+                        <p class="news-description">${item.description}</p>
+                        <div class="news-meta">
+                            <span class="news-date">📅 ${new Date(item.date).toLocaleDateString()}</span>
+                            <span class="news-read-time">📖 ${item.readTime}</span>
+                        </div>
+                        <div class="news-tags">
+                            ${item.tags.map(tag => `<span class="news-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </article>
+            ").join('');
+        }
+
+        function viewNews(id) {
+            // In a real implementation, this would navigate to a detailed news page
+            console.log('Viewing news article:', id);
+        }
+
+        function searchNews(query) {
+            const filteredNews = allNews.filter(news =>
+                news.title.toLowerCase().includes(query.toLowerCase()) ||
+                news.description.toLowerCase().includes(query.toLowerCase()) ||
+                news.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+            );
+            displayNews(filteredNews);
+        }
+
+        function heroSearch(query) {
+            searchNews(query);
+            if (query) {
+                document.getElementById('nav-search').value = query;
+            }
+        }
+
+        function setupLanguageSelector() {
+            // Load saved language from localStorage
+            const savedLang = localStorage.getItem('lang') || 'en';
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => {
+                if (btn.dataset.lang === savedLang) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function setLanguage(lang) {
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('lang', lang);
+            
+            // In a real implementation, this would translate the page
+            console.log('Switching to language:', lang);
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('nav-search');
+            if (searchInput) {
+                // Debounce search
+                let timeoutId;
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => {
+                        searchNews(this.value);
+                    }, 300);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
