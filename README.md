@@ -15,12 +15,39 @@ A modern, responsive AI news website that collects and categorizes the latest ar
 
 ## Technology Stack
 
-- **Frontend**: HTML5, CSS3, JavaScript, EJS templating
-- **Backend**: Node.js, Express.js
-- **Styling**: Tailwind CSS, custom CSS
-- **Icons**: Lucide Icons
-- **Security**: Helmet, CSP
-- **Performance**: Compression middleware, lazy loading
+- **Framework**: Node.js + Express
+- **Template Engine**: EJS
+- **Styling**: Modern CSS with CSS variables and responsive design
+- **Data Fetching**: Axios for RSS feed integration
+- **Security**: Helmet for security headers
+- **Performance**: Compression middleware
+- **Icons**: SVG icons inline
+
+## Project Structure
+
+```
+├── src/
+│   ├── templates/        # EJS templates
+│   │   ├── index.ejs     # Homepage
+│   │   ├── search.ejs    # Search results
+│   │   ├── category.ejs  # Category page
+│   │   ├── about.ejs     # About page
+│   │   └── error.ejs     # Error page
+│   ├── static/           # Static assets
+│   │   ├── css/          # CSS files
+│   │   │   └── main.css  # Main stylesheet
+│   │   └── images/       # Images
+└── server.js             # Main server file
+├── package.json          # Dependencies and scripts
+├── netlify.toml          # Netlify configuration
+└── .gitignore            # Git ignore file
+```
+
+## API Endpoints
+
+- `GET /api/news` - Get news with optional category and search filtering
+- `GET /api/categories` - Get all available categories
+- `GET /api/stats` - Get website statistics and popular tags
 
 ## Setup
 
@@ -28,18 +55,6 @@ A modern, responsive AI news website that collects and categorizes the latest ar
 2. Install dependencies: `npm install`
 3. Run the development server: `npm run dev`
 4. Visit `http://localhost:3000`
-
-## Deployment
-
-This project is designed for deployment on Netlify with continuous integration from GitHub.
-
-## Features
-
-### Homepage
-- Hero section with search
-- Category cards for quick browsing
-- Latest news showcase
-- Statistics and insights
 
 ### News Categories
 - Browse articles by category

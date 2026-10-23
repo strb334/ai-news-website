@@ -179,13 +179,19 @@ app.get('/api/stats', (req, res) => {
 // Render homepage
 app.get('/', async (req, res) => {
     try {
-        const [newsResponse, categoriesResponse, statsResponse] = await Promise.all([
-            axios.get('https://api.rss2json.com/api.json?rss_url=https://feeds.feedburner.com/oreilly/radar'),
+        const [categoriesResponse, statsResponse] = await Promise.all([
             axios.get('/api/categories'),
             axios.get('/api/stats')
         ]);
         
-        const latestNews = newsResponse.data && newsResponse.data.items ? newsResponse.data.items.slice(0, 6) : [];
+        // Try to fetch external news, but use sample data if it fails
+        let latestNews = [];
+        try {
+            const newsResponse = await axios.get('https://api.rss2json.com/api.json?rss_url=https://feeds.feedburner.com/oreilly/radar', { timeout: 5000 });
+            latestNews = newsResponse.data && newsResponse.data.items ? newsResponse.data.items.slice(0, 6) : [];
+        } catch (newsError) {
+            console.error('Error fetching external news:', newsError);
+        }
         
         res.render('index', {
             title: 'AI News | Latest Artificial Intelligence Technology News',
@@ -196,7 +202,7 @@ app.get('/', async (req, res) => {
             canonicalUrl: 'https://ainews.example.com'
         });
     } catch (error) {
-        console.error('Error fetching external news:', error);
+        console.error('Error loading homepage data:', error);
         res.render('index', {
             title: 'AI News | Latest Artificial Intelligence Technology News',
             description: 'Stay updated with the latest AI news, developments, and research in machine learning, deep learning, NLP, computer vision, and AI ethics.',
